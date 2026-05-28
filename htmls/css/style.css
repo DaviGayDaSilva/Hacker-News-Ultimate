@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: 0.3s;
+}
+
+/* layout geral */
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* sidebar glass */
+.sidebar {
+  width: 200px;
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  margin: 10px 0;
+  opacity: 0.8;
+}
+
+.sidebar a:hover {
+  opacity: 1;
+}
+
+/* main */
+.main {
+  flex: 1;
+  padding: 20px;
+  background: linear-gradient(135deg, #0f0f0f, #111827);
+}
+
+/* cards */
+#posts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+div.card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 15px;
+  backdrop-filter: blur(10px);
+
+  /* animação */
+  animation: fadeIn 0.4s ease;
+  transition: 0.2s;
+}
+
+div.card:hover {
+  transform: translateY(-5px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* tema claro */
+.light {
+  background: #f2f2f2;
+  color: black;
+}
+
+.light .main {
+  background: #ffffff;
+}
+
+.light .sidebar {
+  background: rgba(0,0,0,0.05);
+}
