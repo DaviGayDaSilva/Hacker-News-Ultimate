@@ -4,16 +4,42 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="htmls/css/style.css">
+<link rel="stylesheet" href="style.css">
 
-<title>Hacker News</title>
+<title>Hacker News Moderno</title>
 </head>
 
 <body>
 
-<h1>Hacker News</h1>
+<div class="layout">
 
-<div id="posts"></div>
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Menu</h2>
+
+    <a href="#">Home</a>
+    <a href="#">Top</a>
+    <a href="#">New</a>
+    <a href="#">Ask</a>
+    <a href="#">Show</a>
+    <a href="#">Login</a>
+
+    <button onclick="toggleTheme()">Tema</button>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="main">
+
+    <header>
+      <h1>Hacker News</h1>
+      <button onclick="location.reload()">Atualizar</button>
+    </header>
+
+    <div id="posts"></div>
+
+  </div>
+
+</div>
 
 <script>
 const posts = document.getElementById("posts")
@@ -22,7 +48,7 @@ fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
 .then(res => res.json())
 .then(ids => {
 
-  ids.slice(0,10).forEach(id => {
+  ids.slice(0, 12).forEach(id => {
 
     fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
     .then(res => res.json())
@@ -30,17 +56,15 @@ fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
 
       posts.innerHTML += `
         <div class="card">
+
           <h2>${post.title}</h2>
 
-          <p>
-            👍 ${post.score} pontos
-          </p>
+          <p>👍 ${post.score ?? 0} pontos</p>
 
           <a href="${post.url}" target="_blank">
             Abrir post
           </a>
 
-          <hr>
         </div>
       `
 
@@ -49,6 +73,10 @@ fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
   })
 
 })
+
+function toggleTheme() {
+  document.body.classList.toggle("light")
+}
 </script>
 
 </body>
