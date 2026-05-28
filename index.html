@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="htmls/css/style.css">
+
+<title>Hacker News</title>
+</head>
+
+<body>
+
+<h1>Hacker News</h1>
+
+<div id="posts"></div>
+
+<script>
+const posts = document.getElementById("posts")
+
+fetch("https://hacker-news.firebaseio.com/v0/topstories.json")
+.then(res => res.json())
+.then(ids => {
+
+  ids.slice(0,10).forEach(id => {
+
+    fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
+    .then(res => res.json())
+    .then(post => {
+
+      posts.innerHTML += `
+        <div class="card">
+          <h2>${post.title}</h2>
+
+          <p>
+            👍 ${post.score} pontos
+          </p>
+
+          <a href="${post.url}" target="_blank">
+            Abrir post
+          </a>
+
+          <hr>
+        </div>
+      `
+
+    })
+
+  })
+
+})
+</script>
+
+</body>
+</html>
